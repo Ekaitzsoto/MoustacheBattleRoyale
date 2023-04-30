@@ -13,11 +13,13 @@ return new class extends Migration
     {
         Schema::create('jugadores', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("equipo_id");
-            $table->foreign("equipo_id")->references("id")->on("equipos");
             $table->string("nombre");
             $table->integer("kills");
             $table->boolean("vivo");
+            $table->unsignedBigInteger("equipo_id");
+            $table->foreign("equipo_id")->references("id")->on("equipos");
+            $table->unsignedBigInteger("guerra_id");
+            $table->foreign("guerra_id")->references("id")->on("guerras");
             $table->timestamps();
         });
     }
