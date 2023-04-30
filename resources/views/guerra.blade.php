@@ -63,14 +63,16 @@
                                 @endif
                                 @empty
                                 <div class="alert alert-info" role="alert">
-                                    <p class="text-center"><span><i class="bi bi-info-circle-fill"></i> </span>El equipo no tiene jugadores todavía.</p>
+                                    <p class="text-center"><span><i class="bi bi-info-circle-fill"></i> </span>El equipo no tiene jugadores.</p>
                                 </div>
                                 @endforelse
                             </ol>
-                            <form method="GET" action="{{config('app.url')}}/jugador/nuevo">
-                                <input type="hidden" name="idEquipo" value="{{$equipo->id}}"/>
-                                <button type="submit" class="btn btn-info text-light mt-2"><i class="bi bi-plus-circle-fill"></i> Nuevo Jugador</button>
-                            </form>
+                            @if($guerra->estado == "Creado")
+                                <form method="GET" action="{{config('app.url')}}/jugador/nuevo">
+                                    <input type="hidden" name="idEquipo" value="{{$equipo->id}}"/>
+                                    <button type="submit" class="btn btn-info text-light mt-2"><i class="bi bi-plus-circle-fill"></i> Nuevo Jugador</button>
+                                </form>
+                            @endif
                         </div>
                     </div>
                 </div>
