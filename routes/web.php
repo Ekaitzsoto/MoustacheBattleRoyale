@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [\App\Http\Controllers\GuerraController::class, 'index']);
+Route::get('/guerra', [\App\Http\Controllers\GuerraController::class, 'show']);
+Route::get('/guerra/nueva', [\App\Http\Controllers\GuerraController::class, 'create']);
+Route::post('/guerra/nueva', [\App\Http\Controllers\GuerraController::class, 'store']);
