@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use \App\Models\Guerra;
+use \App\Models\Equipo;
 class EquipoController extends Controller
 {
     /**
@@ -19,7 +20,7 @@ class EquipoController extends Controller
      */
     public function create()
     {
-        //
+        return view('nuevo_equipo');
     }
 
     /**
@@ -27,7 +28,14 @@ class EquipoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $guerra = Guerra::orderBy('created_at', 'desc')->first();
+
+        Equipo::create([
+            'nombre' => $request->get('nombre'),
+            'presidente' => $request->get('presidente'),
+            'guerra_id' => $guerra->id
+        ]);
+        return redirect('/');
     }
 
     /**

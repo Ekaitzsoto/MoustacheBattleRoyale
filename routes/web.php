@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use \App\Http\Controllers\GuerraController;
+use \App\Http\Controllers\EquipoController;
+use \App\Http\Controllers\JugadorController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,8 +15,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [\App\Http\Controllers\GuerraController::class, 'index']);
-Route::get('/guerra', [\App\Http\Controllers\GuerraController::class, 'show']);
-Route::get('/guerra/nueva', [\App\Http\Controllers\GuerraController::class, 'create']);
-Route::post('/guerra/nueva', [\App\Http\Controllers\GuerraController::class, 'store']);
-Route::post('/guerra/{id}/estado', [\App\Http\Controllers\GuerraController::class, 'update']);
+Route::get('/', [GuerraController::class, 'index']);
+Route::get('/guerra', [GuerraController::class, 'show']);
+Route::get('/guerra/nueva', [GuerraController::class, 'create']);
+Route::post('/guerra/nueva', [GuerraController::class, 'store']);
+Route::post('/guerra/{id}/estado', [GuerraController::class, 'update']);
+
+Route::get('/equipo/nuevo', [EquipoController::class, 'create']);
+Route::post('/equipo/nuevo', [EquipoController::class, 'store']);
+
+Route::get('/jugador/nuevo', [JugadorController::class, 'create']);
+Route::post('/jugador/nuevo', [JugadorController::class, 'store']);

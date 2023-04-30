@@ -20,4 +20,8 @@ class Guerra extends Model
     {
         return $this->hasMany('App\Models\Equipo');
     }
+    public function jugadores()
+    {
+        return $this->hasMany('App\Models\Jugador');
+    }
 }

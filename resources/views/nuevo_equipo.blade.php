@@ -2,7 +2,7 @@
 
 @section("contenido")
 <div class="row text-center mt-2">
-    <h1 class="fw-bold text-info-emphasis">Nueva Guerra</h1>
+    <h1 class="fw-bold text-info-emphasis">Nuevo Equipo</h1>
 </div>
 <form method="POST" action="{{  Request::url() }}">
     @csrf
@@ -15,8 +15,8 @@
 
     <div class="row justify-content-center">
         <div class="col-xs-12 col-sm-8 col-md-6 col-lg-4 mb-3">
-            <label for="edicion" class="form-label">Edición</label>
-            <input type="text" class="form-control" id="edicion" name="edicion">
+            <label for="presidente" class="form-label">Presidente</label>
+            <input type="text" class="form-control" id="presidente" name="presidente">
         </div>
     </div>
 

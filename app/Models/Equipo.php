@@ -12,6 +12,7 @@ class Equipo extends Model
     protected $fillable = [
         'nombre',
         'presidente',
+        'guerra_id'
     ];
 
     public function guerra()

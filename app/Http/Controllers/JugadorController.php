@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use \App\Models\Guerra;
+use \App\Models\Equipo;
+use \App\Models\Jugador;
 
 class JugadorController extends Controller
 {
@@ -17,9 +20,9 @@ class JugadorController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        return view('nuevo_jugador', ['idEquipo'=>$request->idEquipo]);
     }
 
     /**
@@ -27,7 +30,15 @@ class JugadorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $guerra = Guerra::orderBy('created_at', 'desc')->first();
+        Jugador::create([
+            'nombre' => $request->get('nombre'),
+            'kills' => 0,
+            'vivo' => true,
+            'equipo_id' => $request->idEquipo,
+            'guerra_id' => $guerra->id
+        ]);
+        return redirect('/');
     }
 
     /**
