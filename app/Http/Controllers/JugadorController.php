@@ -59,6 +59,8 @@ class JugadorController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        \App\Models\Jugador::destroy($id);
+
+        return redirect('/');
     }
 }

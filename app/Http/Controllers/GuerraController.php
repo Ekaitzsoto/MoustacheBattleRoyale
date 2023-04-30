@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use \App\Models\Guerra;
+use \App\Models\Equipo;
 
 class GuerraController extends Controller
 {
@@ -11,7 +13,11 @@ class GuerraController extends Controller
      */
     public function index()
     {
-        $guerra = \App\Models\Guerra::orderBy('created_at', 'desc')->first();
+        $guerra = Guerra::orderBy('created_at', 'desc')->first();
+        if($guerra !=null){
+            $equipos = Equipo::where('guerra_id', 'like' , "%$guerra->id%")->get();
+            return view("guerra", ['guerra' => $guerra], ['equipos' => $equipos]);
+        }
         return view("guerra", ['guerra' => $guerra]);
     }
 
@@ -19,7 +25,7 @@ class GuerraController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-    {   
+    {
         return view("nueva_guerra");
     }
 
@@ -28,10 +34,10 @@ class GuerraController extends Controller
      */
     public function store(Request $request)
     {
-        \App\Models\Guerra::create([
+        Guerra::create([
             'nombre' => $request->get('nombre'),
             'edicion' => $request->get('edicion'),
-            'estado' => "creado"
+            'estado' => "Creado"
         ]);
         return redirect('/');
     }
@@ -41,8 +47,8 @@ class GuerraController extends Controller
      */
     public function show(string $id)
     {
-        $guerraSeleccionada = \App\Models\Guerra::where('id', 'like' , "%$id%")->get();
-        $equiposGuerra =\App\Models\Equipo::where('guerra_id', 'like' , "%$id%")->get();
+        $guerraSeleccionada = Guerra::where('id', 'like' , "%$id%")->get();
+        $equiposGuerra = Equipo::where('guerra_id', 'like' , "%$id%")->get();
         return view('guerra', ['guerra'=> $guerraSeleccionada], ['equipos'=> $equiposGuerra]);
     }
 
@@ -59,7 +65,12 @@ class GuerraController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $guerra = Guerra::find($id);
+
+        $guerra->estado = "En curso";
+        $guerra->save();
+
+        return redirect('/');
     }
 
     /**
@@ -67,7 +78,7 @@ class GuerraController extends Controller
      */
     public function destroy(string $id)
     {
-        \App\Models\Guerra::destroy($id);
+        Guerra::destroy($id);
 
         return redirect('/');
     }

@@ -10,7 +10,7 @@
             <input type="text" class="form-control" id="nombre" name="nombre">
         </div>
     </div>
-    
+
     <div class="row justify-content-center">
         <div class="col-xs-12 col-sm-8 col-md-6 col-lg-4 mb-3">
             <label for="edicion" class="form-label">Edición</label>
