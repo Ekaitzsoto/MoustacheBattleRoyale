@@ -3,7 +3,7 @@
 @section("contenido")
 
 @if($guerra)
-<div class="card text-center">
+<div class="card text-center mt-3">
     <div class="card-header">
         <h1 class="text-center text-info-emphasis fw-bold">{{$guerra->nombre}}
             @if($guerra->estado == "creado")
