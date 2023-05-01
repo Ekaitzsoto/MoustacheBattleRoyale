@@ -1,15 +1,14 @@
 @if($guerra)
 <div class="card text-center mt-3">
     <div class="card-header">
-        <h1 class="text-center text-info-emphasis fw-bold">{{$guerra->nombre}}
-            @if($guerra->estado == "Creado")
-                <span class="badge bg-info">{{$guerra->estado}}</span>
+        <h1 class="text-center text-info-emphasis fw-bold">{{$guerra->nombre}}</h1>
+        @if($guerra->estado == "Creado")
+            <h4><span class="badge bg-info">{{$guerra->estado}}</span></h4>
             @elseif($guerra->estado == "En curso")
-                <span class="badge bg-warning">{{$guerra->estado}}</span>
-            @elseif($guerra->estado == "Finalizado")
-                <span class="badge bg-danger">{{$guerra->estado}}</span>
-            @endif
-        </h1>
+            <h4><span class="badge bg-warning">{{$guerra->estado}}</span></h4>
+        @elseif($guerra->estado == "Finalizado")
+            <h4><span class="badge bg-danger">{{$guerra->estado}}</span></h4>
+        @endif
     </div>
     <div class="card-body">
         <div class="row justify-content-end">

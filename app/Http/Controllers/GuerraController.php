@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use \App\Models\Guerra;
 use \App\Models\Equipo;
 use \App\Models\Jugador;
+use \App\Models\Asesinato;
 
 class GuerraController extends Controller
 {
@@ -15,9 +16,9 @@ class GuerraController extends Controller
     public function index()
     {
         $guerra = Guerra::orderBy('created_at', 'desc')->first();
-        $asesinatos = [];
         if($guerra !=null){
             $equipos = Equipo::where('guerra_id', 'like' , "%$guerra->id%")->get();
+            $asesinatos = Asesinato::where('guerra_id','like', "%$guerra->id%")->orderBy('created_at', 'desc')->get();
             $jugadores = $guerra->jugadores()->get();
             $jugadoresvivos = $guerra->jugadores()->where('vivo', 1)->get();
             if(!empty($jugadores)){
@@ -25,7 +26,7 @@ class GuerraController extends Controller
             }
             return view("guerra", ['guerra' => $guerra,'equipos' => $equipos, 'asesinatos'=>$asesinatos]);
         }
-        return view("guerra", ['guerra' => $guerra, 'asesinatos'=>$asesinatos]);
+        return view("guerra", ['guerra' => $guerra]);
     }
 
     /**

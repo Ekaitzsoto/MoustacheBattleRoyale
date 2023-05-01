@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\GuerraController;
 use \App\Http\Controllers\EquipoController;
 use \App\Http\Controllers\JugadorController;
+use \App\Http\Controllers\ActividadController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,3 +27,5 @@ Route::post('/equipo/nuevo', [EquipoController::class, 'store']);
 
 Route::get('/jugador/nuevo', [JugadorController::class, 'create']);
 Route::post('/jugador/nuevo', [JugadorController::class, 'store']);
+
+Route::post('/actividad/nueva/{id}', [ActividadController::class, 'create']);

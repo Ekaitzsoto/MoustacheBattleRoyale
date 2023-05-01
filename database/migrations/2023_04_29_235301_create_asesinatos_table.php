@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger("guerra_id");
             $table->foreign("guerra_id")->references("id")->on("guerras");
-            $table->integer("asesino");
-            $table->integer("muerto");
+            $table->string("asesino");
+            $table->string("muerto");
             $table->timestamps();
         });
     }
