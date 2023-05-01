@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string("nombre");
             $table->integer("kills");
             $table->boolean("vivo");
+            $table->string("asesinadopor")->nullable();
             $table->unsignedBigInteger("equipo_id");
             $table->foreign("equipo_id")->references("id")->on("equipos");
             $table->unsignedBigInteger("guerra_id");

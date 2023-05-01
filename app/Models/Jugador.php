@@ -13,6 +13,7 @@ class Jugador extends Model
         'nombre',
         'kills',
         'vivo',
+        'asesinadopor',
         'equipo_id',
         'guerra_id'
     ];

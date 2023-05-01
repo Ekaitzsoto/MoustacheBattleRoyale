@@ -31,14 +31,16 @@
                 </div>
             </div>
         </nav>
-        <div class="container-fluid">
-            @yield("contenido")
-        </div> 
+        <div class="container-fluid d-flex justify-content-center">
+
+            @yield('contenido')
+
+        </div>
         <!-- JS de Bootstrap -->
         <div class="text-center bg-dark p-3 fixed-bottom">
             <a class="text-light" href="{{config('app.url')}}/">Ekaitz Soto - 2023</a>
         </div>
-        
+
     </body>
 </html>
 

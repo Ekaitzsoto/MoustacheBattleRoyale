@@ -15,16 +15,17 @@ class GuerraController extends Controller
     public function index()
     {
         $guerra = Guerra::orderBy('created_at', 'desc')->first();
+        $asesinatos = [];
         if($guerra !=null){
             $equipos = Equipo::where('guerra_id', 'like' , "%$guerra->id%")->get();
             $jugadores = $guerra->jugadores()->get();
             $jugadoresvivos = $guerra->jugadores()->where('vivo', 1)->get();
             if(!empty($jugadores)){
-                return view("guerra", ['guerra' => $guerra, 'equipos' => $equipos,'jugadores' => $jugadores, 'jugadoresvivos' => $jugadoresvivos]);
+                return view("guerra", ['guerra' => $guerra, 'equipos' => $equipos,'jugadores' => $jugadores, 'jugadoresvivos' => $jugadoresvivos, 'asesinatos'=>$asesinatos]);
             }
-            return view("guerra", ['guerra' => $guerra,'equipos' => $equipos]);
+            return view("guerra", ['guerra' => $guerra,'equipos' => $equipos, 'asesinatos'=>$asesinatos]);
         }
-        return view("guerra", ['guerra' => $guerra]);
+        return view("guerra", ['guerra' => $guerra, 'asesinatos'=>$asesinatos]);
     }
 
     /**
