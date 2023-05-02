@@ -3,10 +3,14 @@
         <h1 class="text-center text-info-emphasis fw-bold">Asesinatos</h1>
     </div>
     <div class="card-body">
+        @if($guerra->estado!="Finalizada")
+
         <form method="POST" action="{{config('app.url')}}/actividad/nueva/{{$guerra->id}}" class="text-center">
             @csrf
             <button type="submit" class="btn btn-info text-light mx-2 mb-2"><i class="bi bi-play-fill"></i>Nuevo asesinato</button>
         </form>
+
+        @endif
         <ol class="list-group">
             @forelse($asesinatos as $asesinato)
             <li class="list-group-item d-flex justify-content-between align-items-start">

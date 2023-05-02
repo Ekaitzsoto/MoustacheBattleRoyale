@@ -2,7 +2,7 @@
 
 @section('contenido')
 
-@if($guerra!=null && ($guerra->estado == "En curso" || $guerra->estado == "Finalizado"))
+@if($guerra!=null && ($guerra->estado == "En curso" || $guerra->estado == "Finalizada"))
 
 <div class="row row-cols-1 row-cols-sm-1 row-cols-lg-2 col-12 col-lg-10">
     <div class="col">

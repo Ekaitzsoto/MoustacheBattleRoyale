@@ -22,6 +22,11 @@ class GuerraController extends Controller
             $jugadores = $guerra->jugadores()->get();
             $jugadoresvivos = $guerra->jugadores()->where('vivo', 1)->get();
             if(!empty($jugadores)){
+                if(count($jugadoresvivos)==1){
+                    $guerra->estado = "Finalizada";
+                    $guerra->ganador = $jugadoresvivos[0]->nombre;
+                    $guerra->save();
+                }
                 return view("guerra", ['guerra' => $guerra, 'equipos' => $equipos,'jugadores' => $jugadores, 'jugadoresvivos' => $jugadoresvivos, 'asesinatos'=>$asesinatos]);
             }
             return view("guerra", ['guerra' => $guerra,'equipos' => $equipos, 'asesinatos'=>$asesinatos]);

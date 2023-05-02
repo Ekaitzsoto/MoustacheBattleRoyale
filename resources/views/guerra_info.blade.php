@@ -6,9 +6,18 @@
             <h4><span class="badge bg-info">{{$guerra->estado}}</span></h4>
             @elseif($guerra->estado == "En curso")
             <h4><span class="badge bg-warning">{{$guerra->estado}}</span></h4>
-        @elseif($guerra->estado == "Finalizado")
+        @elseif($guerra->estado == "Finalizada")
             <h4><span class="badge bg-danger">{{$guerra->estado}}</span></h4>
         @endif
+
+        @if ($guerra->estado == "Finalizada")
+        <div class="row justify-content-center">
+            <div  class="col-5 text-center">
+                <a class="btn btn-info text-light" href="{{config('app.url')}}/guerra/nueva">Nueva Guerra</a>
+            </div>
+        </div>
+        @endif
+
     </div>
     <div class="card-body">
         <div class="row justify-content-end">
@@ -88,6 +97,7 @@
         </div>
     </div>
 </div>
+
 <div class="row justify-content-center">
     <div  class="col-5 text-center">
         <a class="btn btn-info text-light" href="{{config('app.url')}}/guerra/nueva">Nueva Guerra</a>
