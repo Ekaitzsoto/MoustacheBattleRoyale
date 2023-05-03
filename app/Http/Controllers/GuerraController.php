@@ -22,7 +22,7 @@ class GuerraController extends Controller
             $jugadores = $guerra->jugadores()->get();
             $jugadoresvivos = $guerra->jugadores()->where('vivo', 1)->get();
             if(!empty($jugadores)){
-                if(count($jugadoresvivos)==1){
+                if(count($jugadoresvivos)==1 && $guerra->estado == "En curso"){
                     $guerra->estado = "Finalizada";
                     $guerra->ganador = $jugadoresvivos[0]->nombre;
                     $guerra->save();

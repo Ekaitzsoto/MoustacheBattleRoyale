@@ -21,7 +21,7 @@ class ActividadController extends Controller
      */
     public function create($id)
     {
-        $jugadoresActividad = Jugador::where('vivo', 1)->inRandomOrder()->limit(2)->get();
+        $jugadoresActividad = Jugador::where('vivo', 1)->where('guerra_id', $id)->inRandomOrder()->limit(2)->get();
         Asesinato::create([
             'guerra_id' => $id,
             'asesino' => $jugadoresActividad[0]->nombre,
