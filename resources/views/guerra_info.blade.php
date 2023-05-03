@@ -31,7 +31,11 @@
                 @endif
                 <a class="btn btn-info text-light" href="{{config('app.url')}}/equipo/nuevo"><i class="bi bi-plus-circle-fill"></i> Nuevo Equipo</a>
                 @else
-                <h4 class="mx-2">Jugadores restantes: {{count($jugadoresvivos)}}</h4>
+                    @if (count($jugadoresvivos)==1)
+                        <h4 class="col-12 mx-2 justify-content-md-center">Ganador: <strong>{{$jugadoresvivos[0]->nombre}} !!</strong></h4>
+                    @else
+                        <h4 class="mx-2">Jugadores restantes: {{count($jugadoresvivos)}}</h4>
+                    @endif
                 @endif
             </div>
         </div>

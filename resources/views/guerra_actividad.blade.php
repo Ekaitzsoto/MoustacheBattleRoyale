@@ -1,4 +1,4 @@
-<div class="card mt-3">
+<div class="card mt-3 mb-5">
     <div class="card-header">
         <h1 class="text-center text-info-emphasis fw-bold">Asesinatos</h1>
     </div>

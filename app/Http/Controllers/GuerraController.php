@@ -58,11 +58,9 @@ class GuerraController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show()
     {
-        $guerraSeleccionada = Guerra::where('id', 'like' , "%$id%")->get();
-        $equiposGuerra = Equipo::where('guerra_id', 'like' , "%$id%")->get();
-        return view('guerra', ['guerra'=> $guerraSeleccionada], ['equipos'=> $equiposGuerra]);
+        return redirect('/guerra');
     }
 
     /**

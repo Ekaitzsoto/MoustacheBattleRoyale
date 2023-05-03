@@ -5,6 +5,7 @@ use \App\Http\Controllers\GuerraController;
 use \App\Http\Controllers\EquipoController;
 use \App\Http\Controllers\JugadorController;
 use \App\Http\Controllers\ActividadController;
+use \App\Http\Controllers\IndexController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,8 +17,8 @@ use \App\Http\Controllers\ActividadController;
 |
 */
 
-Route::get('/', [GuerraController::class, 'index']);
-Route::get('/guerra', [GuerraController::class, 'show']);
+Route::get('/', [GuerraController::class, 'show']);
+Route::get('/guerra', [GuerraController::class, 'index']);
 Route::get('/guerra/nueva', [GuerraController::class, 'create']);
 Route::post('/guerra/nueva', [GuerraController::class, 'store']);
 Route::post('/guerra/{id}/estado', [GuerraController::class, 'update']);
@@ -29,3 +30,6 @@ Route::get('/jugador/nuevo', [JugadorController::class, 'create']);
 Route::post('/jugador/nuevo', [JugadorController::class, 'store']);
 
 Route::post('/actividad/nueva/{id}', [ActividadController::class, 'create']);
+
+Route::get('/historial',  [IndexController::class, 'index']);
+Route::get('/estadisticas',  [IndexController::class, 'index']);

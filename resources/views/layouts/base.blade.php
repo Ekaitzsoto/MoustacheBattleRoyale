@@ -19,13 +19,13 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                        <a class="col-sm-12 col-md-3 col-lg-4 navbar-brand font-bold" href="{{config('app.url')}}/historial">Historial</a>
+                        <a class="col-sm-12 col-md-3 col-lg-4 navbar-brand {{Str::contains(url()->current(), 'historial') ? 'fw-bold text-info' : '' }}" href="{{config('app.url')}}/historial">Historial</a>
                         </li>
                         <li class="nav-item">
-                        <a class="col-sm-12 col-md-3 col-lg-4 navbar-brand font-bold" href="{{config('app.url')}}/">Guerra</a>
+                        <a class="col-sm-12 col-md-3 col-lg-4 navbar-brand {{Str::contains(url()->current(), '/guerra') ? 'fw-bold text-info' : '' }}" href="{{config('app.url')}}/">Guerra</a>
                         </li>
                         <li class="nav-item">
-                        <a class="col-sm-12 col-md-3 col-lg-4 navbar-brand font-bold" href="{{config('app.url')}}/estadisticas">Estadísticas</a>
+                        <a class="col-sm-12 col-md-3 col-lg-4 navbar-brand {{Str::contains(url()->current(), 'estadisticas') ? 'fw-bold text-info' : '' }}" href="{{config('app.url')}}/estadisticas">Estadísticas</a>
                         </li>
                     </ul>
                 </div>
