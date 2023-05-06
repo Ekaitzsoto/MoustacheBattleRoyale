@@ -57,7 +57,22 @@
                                 @if ($jugador->vivo)
                                     <li class="list-group-item d-flex justify-content-between align-items-start">
                                         <div class="ms-2 me-auto">
+
+                                            @if ($guerra->estado == "Creado")
+                                            <form method="POST" action="{{config('app.url')}}/jugador/{{$jugador->id}}/delete">
+                                                @csrf
+                                                <div class="fw-bold">{{$jugador->nombre}}
+                                                    <span>
+                                                        <button class="btn" type="submit">
+                                                            <i class="bi bi-trash-fill text-danger"></i>
+                                                        </button>
+                                                    </span>
+                                                </div>
+                                            </form>
+                                            @else
                                             <div class="fw-bold">{{$jugador->nombre}}</div>
+                                            @endif
+
                                         </div>
                                         <span class="badge bg-info rounded-pill">Kills: {{$jugador->kills}}</span>
                                     </li>
