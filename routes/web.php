@@ -28,6 +28,7 @@ Route::post('/equipo/nuevo', [EquipoController::class, 'store']);
 
 Route::get('/jugador/nuevo', [JugadorController::class, 'create']);
 Route::post('/jugador/nuevo', [JugadorController::class, 'store']);
+Route::post('/jugador/{id}/delete', [JugadorController::class, 'destroy']);
 
 Route::post('/actividad/nueva/{id}', [ActividadController::class, 'create']);
 
