@@ -10,6 +10,10 @@ use \App\Models\Asesinato;
 
 class GuerraController extends Controller
 {
+    public function indexRedirect()
+    {
+        return redirect('/guerra');
+    }
     /**
      * Display a listing of the resource.
      */
@@ -60,7 +64,8 @@ class GuerraController extends Controller
      */
     public function show()
     {
-        return redirect('/guerra');
+        $guerras = Guerra::orderBy('created_at', 'desc')->get();
+        return view("historial", ['guerras' => $guerras]);
     }
 
     /**

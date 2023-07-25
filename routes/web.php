@@ -17,7 +17,7 @@ use \App\Http\Controllers\IndexController;
 |
 */
 
-Route::get('/', [GuerraController::class, 'show']);
+Route::get('/', [GuerraController::class, 'indexRedirect']);
 Route::get('/guerra', [GuerraController::class, 'index']);
 Route::get('/guerra/nueva', [GuerraController::class, 'create']);
 Route::post('/guerra/nueva', [GuerraController::class, 'store']);
@@ -32,5 +32,5 @@ Route::post('/jugador/{id}/delete', [JugadorController::class, 'destroy']);
 
 Route::post('/actividad/nueva/{id}', [ActividadController::class, 'create']);
 
-Route::get('/historial',  [IndexController::class, 'index']);
+Route::get('/historial',  [GuerraController::class, 'show']);
 Route::get('/estadisticas',  [IndexController::class, 'index']);
