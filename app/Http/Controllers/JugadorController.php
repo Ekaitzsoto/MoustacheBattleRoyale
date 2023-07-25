@@ -30,6 +30,10 @@ class JugadorController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'nombre' => 'required|max:30',
+        ]);
+
         $guerra = Guerra::orderBy('created_at', 'desc')->first();
         Jugador::create([
             'nombre' => $request->get('nombre'),

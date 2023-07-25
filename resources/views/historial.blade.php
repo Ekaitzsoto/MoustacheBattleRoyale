@@ -25,8 +25,9 @@
                                         <ul><strong>Jugadores:</strong> {{$guerra->jugadores()->count()}}</ul>
                                         <ul><strong>Creado:</strong> {{$guerra->created_at}}</ul>
                                         @empty
-                                        <div class="alert alert-info" role="alert">
-                                            <p class="text-center"><span><i class="bi bi-info-circle-fill"></i> </span>No hay equipos todavía.</p>
+                                        <div class="alert alert-info d-flex align-items-center" role="alert">
+                                            <i class="bi bi-info-circle-fill me-2"></i>
+                                            <div>No hay equipos todavía.</div>
                                         </div>
                                         @endforelse
                                     </ol>
@@ -34,8 +35,9 @@
                             </div>
                         </div>
                     @empty
-                        <div class="alert alert-info" role="alert">
-                            <p class="text-center"><span><i class="bi bi-info-circle-fill"></i> </span>No hay registros de guerras anteriores en la base de datos.</p>
+                        <div class="alert alert-info d-flex align-items-center" role="alert">
+                            <i class="bi bi-info-circle-fill me-2"></i>
+                            <div>No hay registros de guerras en la base de datos.</div>
                         </div>
                     @endforelse
                 </div>

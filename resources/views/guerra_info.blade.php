@@ -82,8 +82,9 @@
                                     </li>
                                 @endif
                                 @empty
-                                <div class="alert alert-info" role="alert">
-                                    <p class="text-center"><span><i class="bi bi-info-circle-fill"></i> </span>El equipo no tiene jugadores.</p>
+                                <div class="alert alert-info d-flex align-items-center" role="alert">
+                                    <i class="bi bi-info-circle-fill me-2"></i>
+                                    <div>El equipo no tiene jugadores.</div>
                                 </div>
                                 @endforelse
                             </ol>
@@ -97,8 +98,9 @@
                     </div>
                 </div>
             @empty
-            <div class="alert alert-info" role="alert">
-                <p class="text-center"><span><i class="bi bi-info-circle-fill"></i> </span>La guerra no tiene equipos todavía.</p>
+            <div class="alert alert-info d-flex align-items-center" role="alert">
+                <i class="bi bi-info-circle-fill me-2"></i>
+                <div>La guerra no tiene equipos todavía.</div>
             </div>
             @endforelse
 
@@ -108,8 +110,9 @@
 @else
 <div class="row justify-content-center">
     <div class="col-xs-12 col-sm-8 col-md-6 col-lg-4 pt-3">
-        <div class="alert alert-info" role="alert">
-            <p class="text-center"><span><i class="bi bi-info-circle-fill"></i> </span>No hay ninguna guerra creada todavía.</p>
+        <div class="alert alert-info d-flex align-items-center" role="alert">
+            <i class="bi bi-info-circle-fill me-2"></i>
+            <div>No hay ninguna guerra creada todavía.</div>
         </div>
     </div>
 </div>
