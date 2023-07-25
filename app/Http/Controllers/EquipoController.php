@@ -28,8 +28,12 @@ class EquipoController extends Controller
      */
     public function store(Request $request)
     {
-        $guerra = Guerra::orderBy('created_at', 'desc')->first();
+        $validated = $request->validate([
+            'nombre' => 'required|max:30',
+            'presidente' => 'required|max:30',
+        ]);
 
+        $guerra = Guerra::orderBy('created_at', 'desc')->first();
         Equipo::create([
             'nombre' => $request->get('nombre'),
             'presidente' => $request->get('presidente'),

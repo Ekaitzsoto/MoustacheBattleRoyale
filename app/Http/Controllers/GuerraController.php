@@ -51,6 +51,11 @@ class GuerraController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'nombre' => 'required|max:30',
+            'edicion' => 'required|max:30',
+        ]);
+
         Guerra::create([
             'nombre' => $request->get('nombre'),
             'edicion' => $request->get('edicion'),

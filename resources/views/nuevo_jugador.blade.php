@@ -5,10 +5,20 @@
     <h1 class="fw-bold text-info-emphasis">Nuevo Jugador</h1>
     <form method="POST" action="{{config('app.url')}}/jugador/nuevo">
         @csrf
+        @if ($errors->any())
+            <div class="alert alert-danger p-0">
+                <ul class="list-group list-group-flush">
+                    @foreach ($errors->all() as $error)
+                        <li class="list-group-item list-group-item-danger">{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <div class="row justify-content-center text-start">
             <div class="col-12 mb-3">
                 <label for="nombre" class="form-label">Nombre</label>
-                <input type="text" class="form-control" id="nombre" name="nombre">
+                <input type="text" class="form-control @error('nombre') is-invalid @enderror" id="nombre" name="nombre" value="{{ old('nombre') }}">
             </div>
         </div>
 
