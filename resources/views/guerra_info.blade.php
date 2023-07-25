@@ -55,26 +55,23 @@
                                 <!-- JUGADORES -->
                                 @forelse($equipo->jugadores()->get() as $jugador)
                                 @if ($jugador->vivo)
-                                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
                                         <div class="ms-2 me-auto">
-
-                                            @if ($guerra->estado == "Creado")
+                                            <div class="fw-bold">{{$jugador->nombre}}</div>
+                                        </div>
+                                        @if ($guerra->estado == "Creado")
                                             <form method="POST" action="{{config('app.url')}}/jugador/{{$jugador->id}}/delete">
                                                 @csrf
-                                                <div class="fw-bold">{{$jugador->nombre}}
-                                                    <span>
-                                                        <button class="btn" type="submit">
-                                                            <i class="bi bi-trash-fill text-danger"></i>
-                                                        </button>
-                                                    </span>
-                                                </div>
+                                                <span>
+                                                    <button class="btn btn-danger" type="submit">
+                                                        <i class="bi bi-trash text-light"></i>
+                                                    </button>
+                                                </span>
                                             </form>
-                                            @else
-                                            <div class="fw-bold">{{$jugador->nombre}}</div>
-                                            @endif
-
-                                        </div>
-                                        <span class="badge bg-info rounded-pill">Kills: {{$jugador->kills}}</span>
+                                        @endif
+                                        @if ($guerra->estado != "Creado")
+                                            <span class="badge bg-info rounded-pill">Kills: {{$jugador->kills}}</span>
+                                        @endif
                                     </li>
                                 @else
                                     <li class="list-group-item d-flex justify-content-between align-items-start">

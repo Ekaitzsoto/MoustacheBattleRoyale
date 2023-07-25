@@ -14,7 +14,7 @@
 </div>
 @else
 
-<div class="row row-cols-1 col-12 col-lg-10">
+<div class="row sss row-cols-1 col-12 col-lg-10">
     <div class="col">
         @include('guerra_info')
     </div>
