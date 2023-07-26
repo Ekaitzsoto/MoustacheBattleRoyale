@@ -18,18 +18,18 @@
                             <div id="collapse{{$guerra->id}}" class="accordion-collapse collapse" data-bs-parent="#accordionGuerras">
                                 <div class="accordion-body">
                                     <ol class="list-group list-group-numbered">
-                                        @forelse($guerra->equipos()->get() as $equipo)
+                                        @if($guerra->equipos()->get()->isEmpty())
+                                        <div class="alert alert-info d-flex align-items-center" role="alert">
+                                            <i class="bi bi-info-circle-fill me-2"></i>
+                                            <div>No hay equipos todavía.</div>
+                                        </div>
+                                        @else
                                         <ul><strong>Ganador:</strong> {{$guerra->ganador ? $guerra->ganador : "-"}}</ul>
                                         <hr>
                                         <ul><strong>Equipos:</strong> {{$guerra->equipos()->count()}}</ul>
                                         <ul><strong>Jugadores:</strong> {{$guerra->jugadores()->count()}}</ul>
                                         <ul><strong>Creado:</strong> {{$guerra->created_at}}</ul>
-                                        @empty
-                                        <div class="alert alert-info d-flex align-items-center" role="alert">
-                                            <i class="bi bi-info-circle-fill me-2"></i>
-                                            <div>No hay equipos todavía.</div>
-                                        </div>
-                                        @endforelse
+                                        @endif
                                     </ol>
                                 </div>
                             </div>
