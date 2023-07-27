@@ -19,8 +19,7 @@ class IndexController extends Controller
     public function show()
     {
         $guerra = Guerra::latest()->first();
-
-        if($guerra->jugadores !=null && $guerra->jugadores->count() > 0){
+        if($guerra != null && $guerra->jugadores->count() > 0){
             $restantes = $guerra->jugadores()->where('vivo', 1)->get();
             $porcientoVivos = ($restantes->count() / $guerra->jugadores()->count())*100;
             $totalMuertos = $guerra->jugadores()->count()-$restantes->count();
