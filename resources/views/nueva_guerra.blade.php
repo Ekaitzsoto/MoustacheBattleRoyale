@@ -24,8 +24,8 @@
 
         <div class="row justify-content-center text-start">
             <div class="col-12 mb-3">
-                <label for="edicion" class="form-label">Edición</label>
-                <input type="text" class="form-control @error('edicion') is-invalid @enderror" id="edicion" name="edicion" value="{{ old('edicion') }}">
+                <label for="jugadores_equipo" class="form-label">Máximo de jugadores por equipo</label>
+                <input type="number" class="form-control @error('jugadores_equipo') is-invalid @enderror" id="jugadores_equipo" name="jugadores_equipo" value="{{ old('jugadores_equipo') }}">
             </div>
         </div>
 

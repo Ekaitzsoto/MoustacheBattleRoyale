@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('guerras', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->string('edicion');
+            $table->integer('jugadores_equipo');
             $table->string('ganador')->nullable();
             $table->string('estado');
             $table->timestamps();

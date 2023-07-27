@@ -88,7 +88,7 @@
                                 </div>
                                 @endforelse
                             </ol>
-                            @if($guerra->estado == "Creado")
+                            @if($guerra->estado == "Creado" && $equipo->jugadores()->count() < $guerra->jugadores_equipo)
                                 <form method="GET" action="{{config('app.url')}}/jugador/nuevo">
                                     <input type="hidden" name="idEquipo" value="{{$equipo->id}}"/>
                                     <button type="submit" class="btn btn-info text-light mt-2"><i class="bi bi-plus-circle-fill"></i> Nuevo Jugador</button>

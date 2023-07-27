@@ -53,12 +53,12 @@ class GuerraController extends Controller
     {
         $validated = $request->validate([
             'nombre' => 'required|max:30',
-            'edicion' => 'required|max:30',
+            'jugadores_equipo' => 'required',
         ]);
 
         Guerra::create([
             'nombre' => $request->get('nombre'),
-            'edicion' => $request->get('edicion'),
+            'jugadores_equipo' => $request->get('jugadores_equipo'),
             'estado' => "Creado"
         ]);
         return redirect('/');
