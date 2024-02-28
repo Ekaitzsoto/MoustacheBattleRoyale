@@ -46,7 +46,7 @@
                 <div class="accordion-item">
                     <h2 class="accordion-header">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{$equipo->id}}" aria-expanded="true" aria-controls="collapse{{$equipo->id}}">
-                        <span>{{$equipo->nombre}}<span>({{$equipo->presidente}})</span></span>
+                        <span>{{$equipo->nombre}}<span> ({{$equipo->presidente}})</span></span>
                         </button>
                     </h2>
                     <div id="collapse{{$equipo->id}}" class="accordion-collapse collapse" data-bs-parent="#accordionEquipos">
