@@ -31,13 +31,13 @@
                 </div>
             </div>
         </nav>
-        <div class="container-fluid d-flex justify-content-center mb-3">
+        <div class="container-fluid d-flex justify-content-center mb-5 pb-4">
 
             @yield('contenido')
 
         </div>
         <!-- JS de Bootstrap -->
-        <div class="text-center bg-dark p-3 sticky-bottom">
+        <div class="text-center bg-dark p-3 mt-5 fixed-bottom">
             <a class="text-light" href="{{config('app.url')}}/">Ekaitz Soto - 2023</a>
         </div>
 
