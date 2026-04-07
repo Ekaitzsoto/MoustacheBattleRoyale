@@ -45,8 +45,8 @@
             @forelse ($equipos as $equipo)
                 <div class="accordion-item">
                     <h2 class="accordion-header">
-                        <button class="accordion-button collapsed {{ $equipo->jugadores->where('vivo', true)->isEmpty() ? 'bg-danger-subtle' : '' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{$equipo->id}}" aria-expanded="true" aria-controls="collapse{{$equipo->id}}">
-                        <span class=" {{ $equipo->jugadores->where('vivo', true)->isEmpty() ? 'text-danger' : '' }}">{{$equipo->nombre}}<span> ({{$equipo->presidente}})</span></span>
+                        <button class="accordion-button collapsed {{ $equipo->jugadores->where('vivo', true)->isEmpty() ? 'bg-warning-subtle' : '' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{$equipo->id}}" aria-expanded="true" aria-controls="collapse{{$equipo->id}}">
+                        <span class=" {{ $equipo->jugadores->where('vivo', true)->isEmpty() ? 'warning-danger' : '' }}">{{$equipo->nombre}}<span> ({{$equipo->presidente}})</span></span>
                         </button>
                     </h2>
                     <div id="collapse{{$equipo->id}}" class="accordion-collapse collapse" data-bs-parent="#accordionEquipos">
@@ -82,7 +82,7 @@
                                     </li>
                                 @endif
                                 @empty
-                                <div class="alert alert-info d-flex align-items-center" role="alert">
+                                <div class="alert alert-warning d-flex align-items-center" role="alert">
                                     <i class="bi bi-info-circle-fill me-2"></i>
                                     <div>El equipo no tiene jugadores.</div>
                                 </div>

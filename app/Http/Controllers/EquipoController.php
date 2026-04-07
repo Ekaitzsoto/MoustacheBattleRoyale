@@ -39,7 +39,7 @@ class EquipoController extends Controller
             'presidente' => $request->get('presidente'),
             'guerra_id' => $guerra->id
         ]);
-        return redirect('/');
+        return redirect('/guerra');
     }
 
     /**

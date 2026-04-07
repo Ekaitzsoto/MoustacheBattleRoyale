@@ -42,7 +42,7 @@ class JugadorController extends Controller
             'equipo_id' => $request->idEquipo,
             'guerra_id' => $guerra->id
         ]);
-        return redirect('/');
+        return redirect('/guerra');
     }
 
     /**
@@ -76,6 +76,6 @@ class JugadorController extends Controller
     {
         \App\Models\Jugador::destroy($id);
 
-        return redirect('/');
+        return redirect('/guerra');
     }
 }

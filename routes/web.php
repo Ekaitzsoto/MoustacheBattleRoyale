@@ -17,7 +17,7 @@ use \App\Http\Controllers\IndexController;
 |
 */
 
-Route::get('/', [GuerraController::class, 'indexRedirect']);
+Route::get('/', [IndexController::class, 'index']);
 Route::get('/guerra', [GuerraController::class, 'index']);
 Route::get('/guerra/nueva', [GuerraController::class, 'create']);
 Route::post('/guerra/nueva', [GuerraController::class, 'store']);

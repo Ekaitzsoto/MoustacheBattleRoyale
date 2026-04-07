@@ -10,7 +10,7 @@ class IndexController extends Controller
 {
     public function index()
     {
-        return view("endesarrollo");
+        return view("home");
     }
 
     /**

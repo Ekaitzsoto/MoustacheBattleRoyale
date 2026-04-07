@@ -7,9 +7,35 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+        
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+        
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+        
         <title>Moustache Battle Royale</title>
+        <style>
+            body {
+                background-color: #000;
+                margin: 0;
+                overflow: hidden;
+                min-height: 100vh;
+                position: relative;
+            }
+            
+            body::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background: url('{{ asset('img/bg.png') }}') no-repeat center/cover;
+                filter: grayscale(80%);
+                z-index: -1; 
+            }
+        </style>
     </head>
     <body class="bg-dark-subtle">
+        @if(!isset($hideNav) || !$hideNav)
         <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
             <div class="container-fluid">
                 <a class="navbar-brand fw-bold" href="{{config('app.url')}}">Moustache Battle Royale</a>
@@ -22,7 +48,7 @@
                         <a class="col-sm-12 col-md-3 col-lg-4 navbar-brand {{Str::contains(url()->current(), 'historial') ? 'fw-bold text-info' : '' }}" href="{{config('app.url')}}/historial">Historial</a>
                         </li>
                         <li class="nav-item">
-                        <a class="col-sm-12 col-md-3 col-lg-4 navbar-brand {{Str::contains(url()->current(), '/guerra') ? 'fw-bold text-info' : '' }}" href="{{config('app.url')}}/">Guerra</a>
+                        <a class="col-sm-12 col-md-3 col-lg-4 navbar-brand {{Str::contains(url()->current(), '/guerra') ? 'fw-bold text-info' : '' }}" href="{{config('app.url')}}/guerra">Guerra</a>
                         </li>
                         <li class="nav-item">
                         <a class="col-sm-12 col-md-3 col-lg-4 navbar-brand {{Str::contains(url()->current(), 'estadisticas') ? 'fw-bold text-info' : '' }}" href="{{config('app.url')}}/estadisticas">Estadísticas</a>
@@ -31,16 +57,19 @@
                 </div>
             </div>
         </nav>
+        @endif
         <div class="container-fluid d-flex justify-content-center mb-5 pb-4">
 
             @yield('contenido')
 
         </div>
         <!-- JS de Bootstrap -->
-        <div class="text-center bg-dark p-3 mt-5 fixed-bottom">
-            <a class="text-light" href="{{config('app.url')}}/">Ekaitz Soto - 2023</a>
-        </div>
 
+        @if(!isset($hideFooter) || !$hideFooter)
+        <div class="text-center bg-dark p-3 mt-5 fixed-bottom">
+            <a class="text-light" href="{{config('app.url')}}/">Ekaitz Soto - 2026</a>
+        </div>
+        @endif
     </body>
 </html>
 

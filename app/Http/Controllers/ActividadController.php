@@ -35,7 +35,7 @@ class ActividadController extends Controller
         $asesino = Jugador::find($jugadoresActividad[0]->id);
         $asesino->kills = $asesino->kills+1;
         $asesino->save();
-        return redirect('/');
+        return redirect('/guerra');
     }
 
     /**

@@ -10,10 +10,6 @@ use \App\Models\Asesinato;
 
 class GuerraController extends Controller
 {
-    public function indexRedirect()
-    {
-        return redirect('/guerra');
-    }
     /**
      * Display a listing of the resource.
      */
@@ -61,7 +57,7 @@ class GuerraController extends Controller
             'jugadores_equipo' => $request->get('jugadores_equipo'),
             'estado' => "Creado"
         ]);
-        return redirect('/');
+        return redirect('/guerra');
     }
 
     /**
@@ -91,7 +87,7 @@ class GuerraController extends Controller
         $guerra->estado = "En curso";
         $guerra->save();
 
-        return redirect('/');
+        return redirect('/guerra');
     }
 
     /**
@@ -101,6 +97,6 @@ class GuerraController extends Controller
     {
         Guerra::destroy($id);
 
-        return redirect('/');
+        return redirect('/guerra');
     }
 }
