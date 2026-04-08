@@ -1,43 +1,88 @@
 @extends('layouts.base')
 
 @section('contenido')
+<style>
+    .accordion-item {
+        background-color: transparent !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    }
 
-<div class="row row-cols-1 col-12 col-lg-10">
+    .accordion-button {
+        color: #fff !important;
+        background-color: transparent !important;
+    }
+
+    .accordion-button:not(.collapsed) {
+        background-color: rgba(255, 255, 255, 0.05) !important;
+        color: #0dcaf0 !important;
+        box-shadow: none !important;
+    }
+
+    .accordion-button::after {
+        filter: brightness(0) invert(1);
+    }
+
+    .accordion-body {
+        color: #fff !important;
+    }
+    
+    .text-muted-custom {
+        color: rgba(255, 255, 255, 0.5) !important;
+    }
+</style>
+
+<div class="row row-cols-1 row-cols-sm-1 row-cols-lg-2 col-12 col-lg-10">
     <div class="col">
-        <div class="row justify-content-center">
-            <div class="col-xs-12 col-sm-8 col-md-6 col-lg-4 pt-3">
-                <div class="accordion" id="accordionEquipos">
+        <div class="card text-bg-dark mt-3 mb-5">
+            <div class="card-header">
+                <h4 class="text-center text-info text-uppercase fw-bold m-0">Historial</h4>
+            </div>
+            <div class="card-body">
+                <div class="accordion" id="accordionGuerras">
                     @forelse ($guerras as $guerra)
                         <div class="accordion-item">
                             <h2 class="accordion-header">
-                                <button class="accordion-button d-flex justify-content-between collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{$guerra->id}}" aria-expanded="true" aria-controls="collapse{{$guerra->id}}">
-                                    <span class="ms-2 me-auto badge {{$guerra->estado == 'Creado' ? 'bg-info' : ''}} {{$guerra->estado == 'Finalizada' ? 'bg-danger' : ''}} {{$guerra->estado == 'En curso' ? 'bg-warning' : ''}}">{{$guerra->estado}}</span>
-                                    <span class="ms-2 me-auto">{{$guerra->nombre}}</span>
+                                <button class="accordion-button collapsed shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{$guerra->id}}">
+                                    @php
+                                        $badgeColor = [
+                                            'Creado' => 'bg-info',
+                                            'En curso' => 'bg-warning',
+                                            'Finalizada' => 'bg-danger'
+                                        ][$guerra->estado] ?? 'bg-secondary';
+                                    @endphp
+                                    <span class="badge {{ $badgeColor }} me-3">{{ $guerra->estado }}</span>
+                                    <span class="fw-bold">{{ $guerra->nombre }}</span>
                                 </button>
                             </h2>
+                            
                             <div id="collapse{{$guerra->id}}" class="accordion-collapse collapse" data-bs-parent="#accordionGuerras">
                                 <div class="accordion-body">
-                                    <ol class="list-group list-group-numbered">
-                                        @if($guerra->equipos()->get()->isEmpty())
-                                        <div class="alert alert-info d-flex align-items-center" role="alert">
-                                            <i class="bi bi-info-circle-fill me-2"></i>
-                                            <div>No hay equipos todavía.</div>
+                                    @if($guerra->equipos->isEmpty())
+                                        <div class="alert alert-info border-0 bg-transparent m-0">
+                                            <i class="bi bi-info-circle-fill me-2"></i> No hay datos disponibles.
                                         </div>
-                                        @else
-                                        <ul><strong>Ganador:</strong> {{$guerra->ganador ? $guerra->ganador : "-"}}</ul>
-                                        <hr>
-                                        <ul><strong>Equipos:</strong> {{$guerra->equipos()->count()}}</ul>
-                                        <ul><strong>Jugadores:</strong> {{$guerra->jugadores()->count()}}</ul>
-                                        <ul><strong>Creado:</strong> {{$guerra->created_at}}</ul>
-                                        @endif
-                                    </ol>
+                                    @else
+                                        <div class="row">
+                                            <div class="col-12 col-md-6">
+                                                <p class="mb-1 text-info"><strong>Ganador:</strong> {{ $guerra->ganador ?: "En curso" }}</p>
+                                                <p class="mb-2 small text-muted-custom">ID de Guerra: #{{ $guerra->id }}</p>
+                                            </div>
+                                            <div class="col-12 col-md-6 border-start border-secondary">
+                                                <ul class="list-unstyled mb-0">
+                                                    <li><strong>Equipos:</strong> {{ $guerra->equipos->count() }}</li>
+                                                    <li><strong>Jugadores:</strong> {{ $guerra->jugadores->count() }}</li>
+                                                    <li><strong>Fecha:</strong> {{ $guerra->created_at->format('d/m/Y') }}</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
                     @empty
-                        <div class="alert alert-info d-flex align-items-center" role="alert">
-                            <i class="bi bi-info-circle-fill me-2"></i>
-                            <div>No hay registros de guerras en la base de datos.</div>
+                        <div class="text-center py-4">
+                            <p class="text-muted-custom">No hay registros de guerras.</p>
+                            <a class="btn btn-outline-info btn-sm" href="{{ url('/guerra/nueva') }}">Crear Guerra</a>
                         </div>
                     @endforelse
                 </div>
@@ -45,5 +90,4 @@
         </div>
     </div>
 </div>
-
 @endsection

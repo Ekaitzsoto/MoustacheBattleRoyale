@@ -19,7 +19,6 @@
             body {
                 background-color: #000;
                 margin: 0;
-                overflow: hidden;
                 min-height: 100vh;
                 position: relative;
             }
@@ -38,12 +37,12 @@
         @if(!isset($hideNav) || !$hideNav)
         <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
             <div class="container-fluid">
-                <a class="navbar-brand fw-bold" href="{{config('app.url')}}">Moustache Battle Royale</a>
+                <a class="navbar-brand text-uppercase fw-bold" href="{{config('app.url')}}">Moustache Battle Royale</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
+                    <ul class="navbar-nav text-uppercase">
                         <li class="nav-item">
                         <a class="col-sm-12 col-md-3 col-lg-4 navbar-brand {{Str::contains(url()->current(), 'historial') ? 'fw-bold text-info' : '' }}" href="{{config('app.url')}}/historial">Historial</a>
                         </li>
@@ -66,8 +65,11 @@
         <!-- JS de Bootstrap -->
 
         @if(!isset($hideFooter) || !$hideFooter)
-        <div class="text-center bg-dark p-3 mt-5 fixed-bottom">
-            <a class="text-light" href="{{config('app.url')}}/">Ekaitz Soto - 2026</a>
+        <div class="text-center bg-dark text-secondary p-3 mt-5 fixed-bottom">
+            <small class="d-block mb-1">HALL OF FAME: War 1: Miss Spider • War 2: Cao de Benos • War 3: Mikel mago • War 4: Rupolla • War 5: Esteban • War 6: Qin Shi Huan</small>
+            <a class="text-secondary text-decoration-none" href="{{ url('/') }}">
+                <small>Ekaitz Soto (Dev) / Asier Redondo (DevOps) - 2026</small>
+            </a>
         </div>
         @endif
     </body>

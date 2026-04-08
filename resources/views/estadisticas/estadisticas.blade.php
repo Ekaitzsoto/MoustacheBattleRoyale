@@ -5,9 +5,9 @@
 
     @if (isset($restantes))
     <div class="col">
-        <div class="card mt-3 mb-3">
+        <div class="card text-bg-dark mt-3 mb-3">
             <div class="card-header">
-                <h5 class="text-center text-info-emphasis fw-bold">Estadísticas</h5>
+                <h5 class="text-center text-info text-uppercase fw-bold">Estadísticas</h5>
             </div>
             <div class="card-body">
                 @include('estadisticas.estadisticas_progreso')
@@ -18,9 +18,9 @@
 
     @if (isset($topAsesinos))
     <div class="col">
-        <div class="card mb-3">
+        <div class="card text-bg-dark mb-3">
             <div class="card-header">
-                <h4 class="text-center text-info-emphasis fw-bold">Asesinos</h4>
+                <h4 class="text-center text-info text-uppercase fw-bold">Asesinos</h4>
             </div>
             <div class="card-body">
                 @include('estadisticas.estadisticas_asesinos')
@@ -31,9 +31,9 @@
 
     @if (isset($topAsesinos))
     <div class="col mb-5">
-        <div class="card mb-4">
+        <div class="card text-bg-dark mb-4">
             <div class="card-header">
-                <h4 class="text-center text-info-emphasis fw-bold">Mejores equipos</h4>
+                <h4 class="text-center text-info text-uppercase fw-bold">Mejores equipos</h4>
             </div>
             <div class="card-body">
                 @include('estadisticas.estadisticas_equipos')

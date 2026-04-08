@@ -1,6 +1,6 @@
-<div class="card mt-3 mb-5">
+<div class="card text-bg-dark mt-3 mb-5">
     <div class="card-header">
-        <h1 class="text-center text-info-emphasis fw-bold">Asesinatos</h1>
+        <h1 class="text-center text-info fw-bold">Asesinatos</h1>
     </div>
     <div class="card-body">
         @if($guerra->estado!="Finalizada")
@@ -13,15 +13,16 @@
         @endif
         <ol class="list-group">
             @forelse($asesinatos as $asesinato)
-            <li class="list-group-item d-flex justify-content-between align-items-start">
+            <li class="list-group-item bg-transparent d-flex text-light justify-content-between align-items-start">
                 <div class="d-flex w-100 justify-content-between">
                     <p class="mb-1"><strong>{{$asesinato->asesino}}</strong> ha matado a <strong>{{$asesinato->muerto}}</strong></p>
                     <small>{{$asesinato->created_at->locale('es_ES')->diffForHumans(['parts' => 3, 'short'=>true]);}}</small>
                 </div>
             </li>
             @empty
-            <div class="alert alert-info" role="alert">
-                <p class="text-center"><span><i class="bi bi-info-circle-fill"></i> </span>No ha habido ningún asesinato todavía</p>
+            <div class="alert alert-info d-flex align-items-center" role="alert">
+                <i class="bi bi-info-circle-fill"></i>
+                <div>No ha habido ningún asesinato todavía.</div>
             </div>
             @endforelse
         </ol>

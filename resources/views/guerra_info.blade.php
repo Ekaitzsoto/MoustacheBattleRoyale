@@ -1,125 +1,141 @@
 @if($guerra)
-<div class="card text-center mt-3">
+<style>
+    .accordion-item {
+        background-color: transparent !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    }
+
+    .accordion-button {
+        background-color: transparent !important;
+        color: white !important;
+        box-shadow: none !important;
+    }
+
+    .accordion-button:not(.collapsed) {
+        background-color: rgba(13, 202, 240, 0.1) !important;
+        color: #0dcaf0 !important;
+    }
+
+    .accordion-button::after {
+        filter: brightness(0) invert(1);
+    }
+    
+    .list-group-item {
+        border: none !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+    }
+    
+    .list-group-item:last-child {
+        border-bottom: none !important;
+    }
+</style>
+
+<div class="card text-bg-dark text-center mt-3">
     <div class="card-header">
-        <h1 class="text-center text-info-emphasis fw-bold">{{$guerra->nombre}}</h1>
-        @if($guerra->estado == "Creado")
-            <h4><span class="badge bg-info">{{$guerra->estado}}</span></h4>
-            @elseif($guerra->estado == "En curso")
-            <h4><span class="badge bg-warning">{{$guerra->estado}}</span></h4>
-        @elseif($guerra->estado == "Finalizada")
-            <h4><span class="badge bg-danger">{{$guerra->estado}}</span></h4>
-        @endif
+        <h1 class="text-info fw-bold">{{ $guerra->nombre }}</h1>
+        
+        @php
+            $badgeColor = [
+                'Creado' => 'bg-info',
+                'En curso' => 'bg-warning',
+                'Finalizada' => 'bg-danger'
+            ][$guerra->estado] ?? 'bg-secondary';
+        @endphp
+        
+        <h4><span class="badge {{ $badgeColor }}">{{ $guerra->estado }}</span></h4>
 
         @if ($guerra->estado == "Finalizada")
-        <div class="row justify-content-center">
-            <div  class="col-5 text-center">
-                <a class="btn btn-info text-light" href="{{config('app.url')}}/guerra/nueva">Nueva Guerra</a>
+            <div class="mt-2">
+                <a class="btn btn-info text-light" href="{{ url('/guerra/nueva') }}">Nueva Guerra</a>
             </div>
-        </div>
         @endif
-
     </div>
+
     <div class="card-body">
-        <div class="row justify-content-end">
-            <div class="col-sm-12 d-flex justify-content-center justify-content-md-end">
-                @if($guerra->estado == "Creado")
-                @if(count($jugadores)>=2)
-                    <form method="POST" action="{{config('app.url')}}/guerra/{{$guerra->id}}/estado">
+        <div class="d-flex justify-content-center justify-content-md-end gap-2 mb-3">
+            @if($guerra->estado == "Creado")
+                @if(count($jugadores) >= 2)
+                    <form method="POST" action="{{ url("/guerra/{$guerra->id}/estado") }}">
                         @csrf
-                        <button type="submit" class="btn btn-info text-light mx-2"><i class="bi bi-play-fill"></i> Empezar Guerra</button>
+                        <button type="submit" class="btn btn-info text-light"><i class="bi bi-play-fill"></i> Empezar</button>
                     </form>
                 @endif
-                <a class="btn btn-info text-light" href="{{config('app.url')}}/equipo/nuevo"><i class="bi bi-plus-circle-fill"></i> Nuevo Equipo</a>
+                <a class="btn btn-info text-light" href="{{ url('/equipo/nuevo') }}"><i class="bi bi-plus-circle-fill"></i> Equipo</a>
+            @else
+                @if (count($jugadoresvivos) == 1)
+                    <h4 class="w-100">🏆 Ganador: <strong>{{ $jugadoresvivos[0]->nombre }}</strong></h4>
                 @else
-                    @if (count($jugadoresvivos)==1)
-                        <h4 class="col-12 mx-2 justify-content-md-center">Ganador: <strong>{{$jugadoresvivos[0]->nombre}} !!</strong></h4>
-                    @else
-                        <h4 class="mx-2">Jugadores restantes: {{count($jugadoresvivos)}}</h4>
-                    @endif
+                    <h4>Vivos: {{ count($jugadoresvivos) }}</h4>
                 @endif
-            </div>
+            @endif
         </div>
-        <hr>
+
+        <hr class="opacity-10">
+
         <div class="accordion" id="accordionEquipos">
-        <!-- EQUIPOS -->
             @forelse ($equipos as $equipo)
+                @php $estaEliminado = $equipo->jugadores->where('vivo', true)->isEmpty(); @endphp
+                
                 <div class="accordion-item">
                     <h2 class="accordion-header">
-                        <button class="accordion-button collapsed {{ $equipo->jugadores->where('vivo', true)->isEmpty() ? 'bg-warning-subtle' : '' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{$equipo->id}}" aria-expanded="true" aria-controls="collapse{{$equipo->id}}">
-                        <span class=" {{ $equipo->jugadores->where('vivo', true)->isEmpty() ? 'warning-danger' : '' }}">{{$equipo->nombre}}<span> ({{$equipo->presidente}})</span></span>
+                        <button class="accordion-button collapsed {{ $estaEliminado ? 'opacity-50' : '' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{$equipo->id}}">
+                            <span class="{{ $estaEliminado ? 'text-danger' : '' }}">
+                                {{ $equipo->nombre }} <small class="opacity-75">({{ $equipo->presidente }})</small>
+                            </span>
                         </button>
                     </h2>
+                    
                     <div id="collapse{{$equipo->id}}" class="accordion-collapse collapse" data-bs-parent="#accordionEquipos">
-                        <div class="accordion-body">
-                            <ol class="list-group list-group-numbered">
-                                <!-- JUGADORES -->
-                                @forelse($equipo->jugadores()->get() as $jugador)
-                                @if ($jugador->vivo)
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        <div class="ms-2 me-auto">
-                                            <div class="fw-bold">{{$jugador->nombre}}</div>
+                        <div class="accordion-body p-0">
+                            <ol class="list-group list-group-numbered list-group-flush">
+                                @forelse($equipo->jugadores as $jugador)
+                                    <li class="list-group-item bg-transparent text-light d-flex justify-content-between align-items-center">
+                                        <div class="ms-2 me-auto {{ !$jugador->vivo ? 'text-decoration-line-through opacity-50' : '' }}">
+                                            <span class="fw-bold">{{ $jugador->nombre }}</span>
                                         </div>
+
                                         @if ($guerra->estado == "Creado")
-                                            <form method="POST" action="{{config('app.url')}}/jugador/{{$jugador->id}}/delete">
+                                            <form method="POST" action="{{ url("/jugador/{$jugador->id}/delete") }}">
                                                 @csrf
-                                                <span>
-                                                    <button class="btn btn-danger" type="submit">
-                                                        <i class="bi bi-trash text-light"></i>
-                                                    </button>
-                                                </span>
+                                                <button class="btn btn-link text-danger p-0" type="submit"><i class="bi bi-trash"></i></button>
                                             </form>
-                                        @endif
-                                        @if ($guerra->estado != "Creado")
-                                            <span class="badge bg-info rounded-pill">Kills: {{$jugador->kills}}</span>
+                                        @else
+                                            <span class="badge {{ $jugador->vivo ? 'bg-info' : 'bg-danger' }} rounded-pill">
+                                                K: {{ $jugador->kills }}
+                                            </span>
                                         @endif
                                     </li>
-                                @else
-                                    <li class="list-group-item d-flex justify-content-between align-items-start">
-                                        <div class="ms-2 me-auto">
-                                            <div class="text-decoration-line-through">{{$jugador->nombre}}</div><span></span>
-                                        </div>
-                                        <span class="badge bg-danger rounded-pill">Kills: {{$jugador->kills}}</span>
-                                    </li>
-                                @endif
                                 @empty
-                                <div class="alert alert-warning d-flex align-items-center" role="alert">
-                                    <i class="bi bi-info-circle-fill me-2"></i>
-                                    <div>El equipo no tiene jugadores.</div>
-                                </div>
+                                    <div class="p-3 text-warning small">Sin jugadores.</div>
                                 @endforelse
                             </ol>
-                            @if($guerra->estado == "Creado" && $equipo->jugadores()->count() < $guerra->jugadores_equipo)
-                                <form method="GET" action="{{config('app.url')}}/jugador/nuevo">
-                                    <input type="hidden" name="idEquipo" value="{{$equipo->id}}"/>
-                                    <button type="submit" class="btn btn-info text-light mt-2"><i class="bi bi-plus-circle-fill"></i> Nuevo Jugador</button>
-                                </form>
+                            
+                            @if($guerra->estado == "Creado" && $equipo->jugadores->count() < $guerra->jugadores_equipo)
+                                <div class="p-2">
+                                    <form method="GET" action="{{ url('/jugador/nuevo') }}">
+                                        <input type="hidden" name="idEquipo" value="{{ $equipo->id }}"/>
+                                        <button type="submit" class="btn btn-sm btn-outline-info w-100"> + Jugador</button>
+                                    </form>
+                                </div>
                             @endif
                         </div>
                     </div>
                 </div>
             @empty
-            <div class="alert alert-info d-flex align-items-center" role="alert">
-                <i class="bi bi-info-circle-fill me-2"></i>
-                <div>La guerra no tiene equipos todavía.</div>
-            </div>
+                <div class="alert alert-info border-0 bg-transparent">
+                    <i class="bi bi-info-circle-fill me-2"></i> No hay equipos todavía.
+                </div>
             @endforelse
-
         </div>
     </div>
 </div>
 @else
-<div class="row justify-content-center">
-    <div class="col-xs-12 col-sm-8 col-md-6 col-lg-4 pt-3">
-        <div class="alert alert-info d-flex align-items-center" role="alert">
-            <i class="bi bi-info-circle-fill me-2"></i>
-            <div>No hay ninguna guerra creada todavía.</div>
+    <div class="text-center mt-5">
+        <div class="alert alert-info d-inline-block px-5">
+            <i class="bi bi-info-circle-fill me-2"></i> No hay ninguna guerra creada.
+        </div>
+        <div class="mt-3">
+            <a class="btn btn-info text-light" href="{{ url('/guerra/nueva') }}">Crear Nueva Guerra</a>
         </div>
     </div>
-</div>
-
-<div class="row justify-content-center">
-    <div  class="col-5 text-center">
-        <a class="btn btn-info text-light" href="{{config('app.url')}}/guerra/nueva">Nueva Guerra</a>
-    </div>
-</div>
 @endif

@@ -17,7 +17,6 @@
     }
 
     .titulo-contenedor {
-        display: inline-block;
         text-align: center;
         pointer-events: auto;
     }
@@ -32,16 +31,16 @@
     .titulo-presentacion-zoom {
         font-size: 200%;
         font-family: 'Press Start 2P';
-        color: #00f7ff !important;
         text-align: center;
-        text-transform: uppercase;
         animation: heartbeat 1s ease-in-out infinite;
         margin: 0;
+        white-space: nowrap;
+        display: inline-block;
     }
 </style>
 
 <div id="titulo" class="fisico titulo-contenedor">
-    <h1 class="titulo-presentacion-zoom">
+    <h1 class="titulo-presentacion-zoom text-info text-uppercase">
         MOUSTACHE<br>BATTLE ROYALE
     </h1>
 </div>
