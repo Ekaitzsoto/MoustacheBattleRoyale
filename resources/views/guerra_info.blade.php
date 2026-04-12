@@ -100,21 +100,21 @@
                                                 <button class="btn btn-link text-danger p-0" type="submit"><i class="bi bi-trash"></i></button>
                                             </form>
                                         @else
-                                            <span class="badge {{ $jugador->vivo ? 'bg-info' : 'bg-danger' }} rounded-pill">
-                                                K: {{ $jugador->kills }}
-                                            </span>
+                                            <span class="badge {{ $jugador->vivo ? 'bg-info' : 'bg-danger' }} rounded-pill">{{ $jugador->kills }}</span>
                                         @endif
                                     </li>
                                 @empty
-                                    <div class="p-3 text-warning small">Sin jugadores.</div>
+                                    <div class="alert alert-info m-2">
+                                        <i class="bi bi-info-circle-fill me-2"></i> No hay equipos todavía.
+                                    </div>
                                 @endforelse
                             </ol>
                             
                             @if($guerra->estado == "Creado" && $equipo->jugadores->count() < $guerra->jugadores_equipo)
-                                <div class="p-2">
+                                <div class="px-2 pb-2">
                                     <form method="GET" action="{{ url('/jugador/nuevo') }}">
                                         <input type="hidden" name="idEquipo" value="{{ $equipo->id }}"/>
-                                        <button type="submit" class="btn btn-sm btn-outline-info w-100"> + Jugador</button>
+                                        <button type="submit" class="btn btn-sm btn-outline-info w-100"><i class="bi bi-plus-circle-fill"></i> Jugador</button>
                                     </form>
                                 </div>
                             @endif
@@ -122,7 +122,7 @@
                     </div>
                 </div>
             @empty
-                <div class="alert alert-info border-0 bg-transparent">
+                <div class="alert alert-info">
                     <i class="bi bi-info-circle-fill me-2"></i> No hay equipos todavía.
                 </div>
             @endforelse

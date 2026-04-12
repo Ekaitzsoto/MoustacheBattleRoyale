@@ -64,8 +64,7 @@
                                     @else
                                         <div class="row">
                                             <div class="col-12 col-md-6">
-                                                <p class="mb-1 text-info"><strong>Ganador:</strong> {{ $guerra->ganador ?: "En curso" }}</p>
-                                                <p class="mb-2 small text-muted-custom">ID de Guerra: #{{ $guerra->id }}</p>
+                                                <p class="mb-1"><strong>Ganador:</strong> {{ $guerra->ganador ?: "No tiene ganador todavía" }}</p>
                                             </div>
                                             <div class="col-12 col-md-6 border-start border-secondary">
                                                 <ul class="list-unstyled mb-0">

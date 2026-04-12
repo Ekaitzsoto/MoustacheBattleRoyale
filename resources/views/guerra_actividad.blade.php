@@ -1,6 +1,6 @@
 <div class="card text-bg-dark mt-3 mb-5">
     <div class="card-header">
-        <h1 class="text-center text-info fw-bold">Asesinatos</h1>
+        <h1 class="text-center text-info text-uppercase fw-bold">Asesinatos</h1>
     </div>
     <div class="card-body">
         @if($guerra->estado!="Finalizada")
@@ -20,9 +20,8 @@
                 </div>
             </li>
             @empty
-            <div class="alert alert-info d-flex align-items-center" role="alert">
-                <i class="bi bi-info-circle-fill"></i>
-                <div>No ha habido ningún asesinato todavía.</div>
+            <div class="alert alert-info mb-0" role="alert">
+                <i class="bi bi-info-circle-fill"></i> No sa matao nadie todavía.
             </div>
             @endforelse
         </ol>
