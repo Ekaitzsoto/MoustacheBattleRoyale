@@ -31,11 +31,11 @@
     }
 </style>
 
-<div class="row row-cols-1 row-cols-sm-1 row-cols-lg-2 col-12 col-lg-10">
+<div class="row row-cols-1 col-12">
     <div class="col">
         <div class="card text-bg-dark mt-3 mb-5">
             <div class="card-header">
-                <h4 class="text-center text-info text-uppercase fw-bold m-0">Historial</h4>
+                <h2 class="text-center text-info text-uppercase fw-bold m-0">Historial</h2>
             </div>
             <div class="card-body">
                 <div class="accordion" id="accordionGuerras">

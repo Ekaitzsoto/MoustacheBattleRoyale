@@ -67,7 +67,7 @@
         @if(!isset($hideFooter) || !$hideFooter)
         <div class="text-center bg-dark text-secondary p-3 mt-5 fixed-bottom">
             <small class="d-block mb-1">HALL OF FAME: War 1: Miss Spider • War 2: Cao de Benos • War 3: Mikel mago • War 4: Rupolla • War 5: Esteban • War 6: Qin Shi Huan</small>
-            <a class="text-secondary text-decoration-none" href="{{ url('/') }}">
+            <a class="text-secondary text-decoration-none" href="https://github.com/Ekaitzsoto/MoustacheBattleRoyale" target="_blank">
                 <small>Ekaitz Soto (Dev) / Asier Redondo (DevOps) - 2026</small>
             </a>
         </div>

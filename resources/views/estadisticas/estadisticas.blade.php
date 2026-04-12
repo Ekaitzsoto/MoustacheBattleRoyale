@@ -1,13 +1,13 @@
 @extends('layouts.base')
 
 @section('contenido')
-<div class="row row-cols-1 row-cols-sm-1 row-cols-lg-2 col-12 col-lg-10">
+<div class="row row-cols-1 col-12">
 
     @if (isset($restantes))
     <div class="col">
         <div class="card text-bg-dark mt-3 mb-3">
             <div class="card-header">
-                <h5 class="text-center text-info text-uppercase fw-bold">Estadísticas</h5>
+                <h2 class="text-center text-info text-uppercase fw-bold">Estadísticas</h2>
             </div>
             <div class="card-body">
                 @include('estadisticas.estadisticas_progreso')
@@ -20,7 +20,7 @@
     <div class="col">
         <div class="card text-bg-dark mb-3">
             <div class="card-header">
-                <h4 class="text-center text-info text-uppercase fw-bold">Asesinos</h4>
+                <h2 class="text-center text-info text-uppercase fw-bold">Asesinos</h2>
             </div>
             <div class="card-body">
                 @include('estadisticas.estadisticas_asesinos')
@@ -33,7 +33,7 @@
     <div class="col mb-5">
         <div class="card text-bg-dark mb-4">
             <div class="card-header">
-                <h4 class="text-center text-info text-uppercase fw-bold">Mejores equipos</h4>
+                <h2 class="text-center text-info text-uppercase fw-bold">Mejores equipos</h2>
             </div>
             <div class="card-body">
                 @include('estadisticas.estadisticas_equipos')
