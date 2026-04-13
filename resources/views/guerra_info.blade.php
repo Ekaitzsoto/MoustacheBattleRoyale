@@ -1,34 +1,6 @@
 @if($guerra)
-<style>
-    .accordion-item {
-        background-color: transparent !important;
-        border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    }
 
-    .accordion-button {
-        background-color: transparent !important;
-        color: white !important;
-        box-shadow: none !important;
-    }
-
-    .accordion-button:not(.collapsed) {
-        background-color: rgba(13, 202, 240, 0.1) !important;
-        color: #0dcaf0 !important;
-    }
-
-    .accordion-button::after {
-        filter: brightness(0) invert(1);
-    }
-    
-    .list-group-item {
-        border: none !important;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
-    }
-    
-    .list-group-item:last-child {
-        border-bottom: none !important;
-    }
-</style>
+<link rel="stylesheet" href="{{ asset('css/guerra_info.css') }}">
 
 <div class="card text-bg-dark text-center mt-3">
     <div class="card-header">

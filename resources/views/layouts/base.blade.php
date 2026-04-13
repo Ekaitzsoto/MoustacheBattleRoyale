@@ -13,25 +13,19 @@
         <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
         
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
-        
+        <link rel="stylesheet" href="{{ asset('css/base.css') }}">
+
         <title>Moustache Battle Royale</title>
-        <style>
-            body {
-                background-color: #000;
-                margin: 0;
-                min-height: 100vh;
-                position: relative;
-            }
-            
-            body::before {
-                content: "";
-                position: absolute;
-                inset: 0;
-                background: url('{{ asset('img/bg.png') }}') no-repeat center/cover;
-                filter: grayscale(80%);
-                z-index: -1; 
-            }
-        </style>
+
+        <meta name="description" content="Simulador de combate automático. ¡Gestiona tu equipo y sobrevive a la guerra!">
+        <meta name="author" content="Ekaitz Soto">
+
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="{{ url()->current() }}">
+        <meta property="og:title" content="Moustache Battle Royale">
+        <meta property="og:description" content="¡PUM! YA ESTA AQUÍ LA GUERRA">
+        <meta property="og:image" content="{{ asset('img/og-image.png') }}">
+
     </head>
     <body class="bg-dark-subtle">
         @if(!isset($hideNav) || !$hideNav)

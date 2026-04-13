@@ -1,35 +1,8 @@
 @extends('layouts.base')
 
 @section('contenido')
-<style>
-    .accordion-item {
-        background-color: transparent !important;
-        border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    }
 
-    .accordion-button {
-        color: #fff !important;
-        background-color: transparent !important;
-    }
-
-    .accordion-button:not(.collapsed) {
-        background-color: rgba(255, 255, 255, 0.05) !important;
-        color: #0dcaf0 !important;
-        box-shadow: none !important;
-    }
-
-    .accordion-button::after {
-        filter: brightness(0) invert(1);
-    }
-
-    .accordion-body {
-        color: #fff !important;
-    }
-    
-    .text-muted-custom {
-        color: rgba(255, 255, 255, 0.5) !important;
-    }
-</style>
+<link rel="stylesheet" href="{{ asset('css/historial.css') }}">
 
 <div class="row row-cols-1 col-12">
     <div class="col">
