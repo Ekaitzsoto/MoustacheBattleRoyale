@@ -51,17 +51,17 @@
             </div>
         </nav>
         @endif
-        <div class="container-fluid d-flex justify-content-center mb-5 pb-4">
+        <div class="container-fluid d-flex justify-content-center pb-4">
 
             @yield('contenido')
 
         </div>
         <!-- JS de Bootstrap -->
 
-        @if(!isset($hideFooter) || !$hideFooter)
+        @if(isset($showFooter) && $showFooter)
         <div class="text-center bg-dark text-secondary p-3 mt-5 fixed-bottom">
             <small class="d-block mb-1">HALL OF FAME: War 1: Miss Spider • War 2: Cao de Benos • War 3: Mikel mago • War 4: Rupolla • War 5: Esteban • War 6: Qin Shi Huan</small>
-            <a class="text-secondary text-decoration-none" href="https://github.com/Ekaitzsoto/MoustacheBattleRoyale" target="_blank">
+            <a class="text-secondary" href="https://github.com/Ekaitzsoto/MoustacheBattleRoyale" target="_blank">
                 <small>Ekaitz Soto (Dev) / Asier Redondo (DevOps) - 2026</small>
             </a>
         </div>

@@ -1,4 +1,4 @@
-@extends("layouts.base", ['hideFooter' => true])
+@extends("layouts.base")
 
 @section("contenido")
 

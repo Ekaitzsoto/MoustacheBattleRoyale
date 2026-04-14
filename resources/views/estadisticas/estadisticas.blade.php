@@ -30,8 +30,8 @@
     @endif
 
     @if (isset($topAsesinos))
-    <div class="col mb-5">
-        <div class="card text-bg-dark mb-4">
+    <div class="col">
+        <div class="card text-bg-dark">
             <div class="card-header">
                 <h2 class="text-center text-info text-uppercase fw-bold">Mejores equipos</h2>
             </div>
