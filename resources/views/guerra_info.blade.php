@@ -77,7 +77,7 @@
                                     </li>
                                 @empty
                                     <div class="alert alert-info m-2">
-                                        <i class="bi bi-info-circle-fill me-2"></i> No hay equipos todavía.
+                                        <i class="bi bi-info-circle-fill me-2"></i> No hay jugadores todavía.
                                     </div>
                                 @endforelse
                             </ol>
