@@ -11,7 +11,7 @@ body::before {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: url('/img/bg.png') no-repeat center center;
+    background: url('/img/bg-esteban.jpeg') no-repeat center center;
     background-size: cover;
     filter: grayscale(80%);
     z-index: -1;

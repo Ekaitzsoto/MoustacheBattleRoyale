@@ -28,18 +28,26 @@ class EquipoController extends Controller
      */
     public function store(Request $request)
     {
+        //validar guerra
+        $guerra = Guerra::orderBy('created_at', 'desc')->first();
+        if (!$guerra) {
+            return redirect()->back()->withErrors(['error' => 'No hay ninguna guerra creada.']);
+        }
+        if ($guerra->estado !== 'Creado') {
+            return redirect()->back()->withErrors(['error' => 'No se pueden añadir equipos: la guerra ya ha comenzado o ha finalizado.']);
+        }
+        //validar equipo
         $validated = $request->validate([
             'nombre' => 'required|max:30',
             'presidente' => 'required|max:30',
         ]);
-
-        $guerra = Guerra::orderBy('created_at', 'desc')->first();
+        
         Equipo::create([
-            'nombre' => $request->get('nombre'),
-            'presidente' => $request->get('presidente'),
+            'nombre' => $validated['nombre'],
+            'presidente' => $validated['presidente'],
             'guerra_id' => $guerra->id
         ]);
-        return redirect('/guerra');
+        return redirect('/guerra')->with('success', '¡Equipo reclutado con éxito!');
     }
 
     /**
@@ -55,7 +63,8 @@ class EquipoController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $equipo = Equipo::findOrFail($id);
+        return view('nuevo_equipo', compact('equipo'));
     }
 
     /**
@@ -63,7 +72,25 @@ class EquipoController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        //validar guerra
+        $guerra = Guerra::orderBy('created_at', 'desc')->first();
+
+        if (!$guerra) {
+            return redirect()->back()->withErrors(['error' => 'No hay ninguna guerra creada.']);
+        }
+        if ($guerra->estado !== 'Creado') {
+            return redirect()->back()->withErrors(['error' => 'No se puede editar el equipo: la guerra ya ha comenzado o ha finalizado.']);
+        }
+        
+        $validated = $request->validate([
+            'nombre' => 'required|max:30',
+            'presidente' => 'required|max:30',
+        ]);
+
+        $equipo = Equipo::findOrFail($id);
+        $equipo->update($validated);
+
+        return redirect('/guerra');
     }
 
     /**
@@ -71,6 +98,10 @@ class EquipoController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $equipo = Equipo::findOrFail($id);
+        $equipo->jugadores()->delete();
+        $equipo->delete();
+
+        return redirect('/guerra');
     }
 }

@@ -69,6 +69,7 @@
                                         @if ($guerra->estado == "Creado")
                                             <form method="POST" action="{{ url("/jugador/{$jugador->id}/delete") }}">
                                                 @csrf
+                                                @method('DELETE')
                                                 <button class="btn btn-link text-danger p-0" type="submit"><i class="bi bi-trash"></i></button>
                                             </form>
                                         @else
@@ -87,6 +88,14 @@
                                     <form method="GET" action="{{ url('/jugador/nuevo') }}">
                                         <input type="hidden" name="idEquipo" value="{{ $equipo->id }}"/>
                                         <button type="submit" class="btn btn-sm btn-outline-info w-100"><i class="bi bi-plus-circle-fill"></i> Jugador</button>
+                                    </form>
+                                </div>
+                            @endif
+                            @if ($guerra->estado == "Creado")
+                                <div class="px-2 pb-2">
+                                    <form method="GET" action="{{ url("/equipo/{$equipo->id}/update") }}">
+                                        @csrf
+                                        <button class="btn btn-sm btn-outline-info w-100" type="submit"><i class="bi bi-pencil"></i> Editar equipo</button>
                                     </form>
                                 </div>
                             @endif
