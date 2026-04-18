@@ -22,6 +22,7 @@ Route::get('/guerra', [GuerraController::class, 'index']);
 Route::get('/guerra/nueva', [GuerraController::class, 'create']);
 Route::post('/guerra/nueva', [GuerraController::class, 'store']);
 Route::post('/guerra/{id}/estado', [GuerraController::class, 'update']);
+Route::post('/guerra/{id}/reiniciar', [GuerraController::class, 'reiniciar']);
 
 Route::get('/equipo/nuevo', [EquipoController::class, 'create']);
 Route::post('/equipo/nuevo', [EquipoController::class, 'store']);

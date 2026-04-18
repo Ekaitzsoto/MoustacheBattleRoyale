@@ -57,7 +57,7 @@ class GuerraController extends Controller
             'jugadores_equipo' => $request->get('jugadores_equipo'),
             'estado' => "Creado"
         ]);
-        return redirect('/guerra');
+        return redirect('/guerra')->with('success', 'Guerra creada.');
     }
 
     /**
@@ -87,7 +87,7 @@ class GuerraController extends Controller
         $guerra->estado = "En curso";
         $guerra->save();
 
-        return redirect('/guerra');
+        return redirect('/guerra')->with('success', 'Y ¡PUM! YA ESTÁ AQUÍ LA GUERRA.');
     }
 
     /**
@@ -96,7 +96,21 @@ class GuerraController extends Controller
     public function destroy(string $id)
     {
         Guerra::destroy($id);
+        return redirect('/guerra')->with('success', 'Guerra eliminada.');
+    }
 
-        return redirect('/guerra');
+    public function reiniciar(string $id)
+    {
+        $guerra = Guerra::orderBy('created_at', 'desc')->first();
+
+        if (!$guerra || $guerra->id != $id) {
+            return redirect('/guerra')->with('error', 'Solo se puede reiniciar la guerra actual');
+        }
+        $guerra->update(['estado' => 'Creado','ganador' => null]);
+
+        Jugador::where('guerra_id', $id)->update(['kills' => 0, 'vivo' => true, 'asesinadopor' => null]);
+        Asesinato::where('guerra_id', $id)->delete();
+
+        return redirect('/guerra')->with('success', 'Guerra reiniciada.');
     }
 }

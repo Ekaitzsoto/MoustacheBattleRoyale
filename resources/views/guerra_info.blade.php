@@ -24,6 +24,27 @@
     </div>
 
     <div class="card-body">
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <i class="bi bi-check-circle-fill me-2"></i>
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+
+        @if (session('error'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                {{ session('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+        @if ($guerra->estado == "En curso")
+            <form method="POST" action="{{ url("/guerra/{$guerra->id}/reiniciar") }}">
+                @csrf
+                <button type="submit" class="btn btn-info mb-3 text-light"><i class="bi bi-arrow-clockwise"></i> Reiniciar</button>
+            </form>
+        @endif
         <div class="d-flex justify-content-center justify-content-md-end gap-2 mb-3">
             @if($guerra->estado == "Creado")
                 @if(count($jugadores) >= 2)
@@ -91,14 +112,23 @@
                                     </form>
                                 </div>
                             @endif
+                            
                             @if ($guerra->estado == "Creado")
                                 <div class="px-2 pb-2">
                                     <form method="GET" action="{{ url("/equipo/{$equipo->id}/update") }}">
                                         @csrf
-                                        <button class="btn btn-sm btn-outline-info w-100" type="submit"><i class="bi bi-pencil"></i> Editar equipo</button>
+                                        <button class="btn btn-sm btn-outline-info w-100" type="submit"><i class="bi bi-pencil"></i> Editar</button>
+                                    </form>
+                                </div>
+                                <div class="px-2 pb-2">
+                                    <form method="POST" action="{{ url("/equipo/{$equipo->id}/delete") }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-sm btn-outline-danger w-100" type="submit"><i class="bi bi-trash"></i> Eliminar</button>
                                     </form>
                                 </div>
                             @endif
+                                    
                         </div>
                     </div>
                 </div>

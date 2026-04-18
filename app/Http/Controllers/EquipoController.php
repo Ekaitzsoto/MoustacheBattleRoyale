@@ -47,7 +47,7 @@ class EquipoController extends Controller
             'presidente' => $validated['presidente'],
             'guerra_id' => $guerra->id
         ]);
-        return redirect('/guerra')->with('success', '¡Equipo reclutado con éxito!');
+        return redirect('/guerra')->with('success', 'Equipo creado.');
     }
 
     /**
@@ -90,7 +90,7 @@ class EquipoController extends Controller
         $equipo = Equipo::findOrFail($id);
         $equipo->update($validated);
 
-        return redirect('/guerra');
+        return redirect('/guerra')->with('success', 'Equipo actualizado.');
     }
 
     /**
@@ -98,10 +98,22 @@ class EquipoController extends Controller
      */
     public function destroy(string $id)
     {
+        //validar guerra
+        $guerra = Guerra::orderBy('created_at', 'desc')->first();
+        if (!$guerra) {
+            return redirect()->back()->withErrors(['error' => 'No hay ninguna guerra creada.']);
+        }
+        if ($guerra->estado !== 'Creado') {
+            return redirect()->back()->withErrors(['error' => 'No se puede eliminar el equipo: la guerra ya ha comenzado o ha finalizado.']);
+        }
         $equipo = Equipo::findOrFail($id);
+        if ($guerra->id !== $equipo->guerra_id) {
+            return redirect()->back()->withErrors(['error' => 'No se puede eliminar el equipo: no pertenece a la guerra actual.']);
+        }
+        
         $equipo->jugadores()->delete();
         $equipo->delete();
 
-        return redirect('/guerra');
+        return redirect('/guerra')->with('success', 'Equipo eliminado.');
     }
 }
