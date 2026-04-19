@@ -32,14 +32,14 @@
         <div class="row justify-content-center text-start">
             <div class="col-12 mb-3">
                 <label for="nombre" class="form-label">Nombre</label>
-                <input type="text" class="form-control bg-transparent text-light @error('nombre') is-invalid @enderror" id="nombre" name="nombre" value="{{ old('nombre', $equipo->nombre ?? '') }}">
+                <input type="text" class="form-control bg-transparent text-light @error('nombre') is-invalid @enderror" maxlength="30" id="nombre" name="nombre" value="{{ old('nombre', $equipo->nombre ?? '') }}">
             </div>
         </div>
         
         <div class="row justify-content-center text-start">
             <div class="col-12 mb-3">
                 <label for="presidente" class="form-label">Presidente</label>
-                <input type="text" class="form-control bg-transparent text-light @error('presidente') is-invalid @enderror" id="presidente" name="presidente" value="{{ old('presidente', $equipo->presidente ?? '') }}">
+                <input type="text" class="form-control bg-transparent text-light @error('presidente') is-invalid @enderror" maxlength="30" id="presidente" name="presidente" value="{{ old('presidente', $equipo->presidente ?? '') }}">
             </div>
         </div>
 

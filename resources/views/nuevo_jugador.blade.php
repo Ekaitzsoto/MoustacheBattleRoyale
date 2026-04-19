@@ -18,7 +18,7 @@
         <div class="row justify-content-center text-start">
             <div class="col-12 mb-3">
                 <label for="nombre" class="form-label">Nombre</label>
-                <input type="text" class="form-control bg-transparent text-light @error('nombre') is-invalid @enderror" id="nombre" name="nombre" value="{{ old('nombre') }}">
+                <input type="text" class="form-control bg-transparent text-light @error('nombre') is-invalid @enderror" maxlength="30" id="nombre" name="nombre" value="{{ old('nombre') }}">
             </div>
         </div>
 
