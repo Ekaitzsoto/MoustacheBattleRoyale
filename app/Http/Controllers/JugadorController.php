@@ -22,7 +22,7 @@ class JugadorController extends Controller
      */
     public function create(Request $request)
     {
-        return view('nuevo_jugador', ['idEquipo'=>$request->idEquipo]);
+        return view('forms/nuevo_jugador', ['idEquipo'=>$request->idEquipo]);
     }
 
     /**

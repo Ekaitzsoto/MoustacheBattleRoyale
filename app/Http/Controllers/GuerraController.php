@@ -27,11 +27,11 @@ class GuerraController extends Controller
                     $guerra->ganador = $jugadoresvivos[0]->nombre;
                     $guerra->save();
                 }
-                return view("guerra", ['guerra' => $guerra, 'equipos' => $equipos,'jugadores' => $jugadores, 'jugadoresvivos' => $jugadoresvivos, 'asesinatos'=>$asesinatos]);
+                return view("guerra/guerra", ['guerra' => $guerra, 'equipos' => $equipos,'jugadores' => $jugadores, 'jugadoresvivos' => $jugadoresvivos, 'asesinatos'=>$asesinatos]);
             }
-            return view("guerra", ['guerra' => $guerra,'equipos' => $equipos, 'asesinatos'=>$asesinatos]);
+            return view("guerra/guerra", ['guerra' => $guerra,'equipos' => $equipos, 'asesinatos'=>$asesinatos]);
         }
-        return view("guerra", ['guerra' => $guerra]);
+        return view("guerra/guerra", ['guerra' => $guerra]);
     }
 
     /**
@@ -39,7 +39,7 @@ class GuerraController extends Controller
      */
     public function create()
     {
-        return view("nueva_guerra");
+        return view("forms/nueva_guerra");
     }
 
     /**

@@ -20,7 +20,7 @@ class EquipoController extends Controller
      */
     public function create()
     {
-        return view('nuevo_equipo');
+        return view('forms/nuevo_equipo');
     }
 
     /**
@@ -64,7 +64,7 @@ class EquipoController extends Controller
     public function edit(string $id)
     {
         $equipo = Equipo::findOrFail($id);
-        return view('nuevo_equipo', compact('equipo'));
+        return view('forms/nuevo_equipo', compact('equipo'));
     }
 
     /**
