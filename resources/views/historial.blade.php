@@ -23,7 +23,7 @@
                                             'Finalizada' => 'bg-danger'
                                         ][$guerra->estado] ?? 'bg-secondary';
                                     @endphp
-                                    <span class="badge {{ $badgeColor }} me-3">{{ $guerra->estado }}</span>
+                                    <span class="badge {{ $badgeColor }} text-uppercase me-3">{{ $guerra->estado }}</span>
                                     <span class="fw-bold">{{ $guerra->nombre }}</span>
                                 </button>
                             </h2>

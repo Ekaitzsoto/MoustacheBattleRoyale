@@ -9,7 +9,7 @@
     ][$guerra->estado] ?? 'bg-secondary';
     @endphp
 
-    <h4><span class="badge {{ $badgeColor }}">{{ $guerra->estado }}</span></h4>
+    <h4><span class="badge {{ $badgeColor }} text-uppercase">{{ $guerra->estado }}</span></h4>
 
     @if ($guerra->estado == "Finalizada")
     <div class="mt-2">

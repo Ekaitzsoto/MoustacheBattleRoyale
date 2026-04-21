@@ -6,7 +6,7 @@
 
 <div class="row row-cols-1 col-12">
     <div class="col">
-        @include('guerra/guerra_info')
+        @include('guerra/guerra_info/guerra_info')
     </div>
     <div class="col">
         @include('guerra/guerra_actividad')
