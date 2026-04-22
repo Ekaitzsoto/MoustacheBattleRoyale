@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \App\Models\Jugador;
-use \App\Models\Asesinato;
+use \App\Models\Actividad;
+use \App\Models\Guerra;
 
 class ActividadController extends Controller
 {
@@ -22,10 +23,11 @@ class ActividadController extends Controller
     public function create($id)
     {
         $jugadoresActividad = Jugador::where('vivo', 1)->where('guerra_id', $id)->inRandomOrder()->limit(2)->get();
-        Asesinato::create([
+        Actividad::create([
             'guerra_id' => $id,
             'asesino' => $jugadoresActividad[0]->nombre,
-            'muerto' => $jugadoresActividad[1]->nombre
+            'muerto' => $jugadoresActividad[1]->nombre,
+            'tipo' => 'asesinato'
         ]);
 
         $muerto = Jugador::find($jugadoresActividad[1]->id);
@@ -38,6 +40,69 @@ class ActividadController extends Controller
         return redirect('/guerra');
     }
 
+    public function eventoAleatorio($id)
+    {
+        $guerra = Guerra::findOrFail($id);
+        $vivosCount = Jugador::where('guerra_id', $id)->where('vivo', 1)->count();
+        $muertosCount = Jugador::where('guerra_id', $id)->where('vivo', 0)->count();
+
+        $eventosCount = Actividad::where('guerra_id', $id)->where('tipo', '!=', 'asesinato')->count();
+        
+        if (($vivosCount < 2 || $muertosCount < 1) && $guerra->estado !== 'En curso' && $eventosCount < $guerra->max_eventos) {
+            return redirect()->back()->with('error', "No se cumplen las condiciones para lanzar un evento en este momento.");
+        }
+        $evento = rand(1, 2);
+
+        if ($evento === 1) {
+            return $this->generarCambioEquipo($guerra);
+        } else {
+            return $this->generarResurreccion($guerra);
+        }
+    }
+
+    private function generarCambioEquipo($guerra)
+    {
+        $jugadores = Jugador::where('guerra_id', $guerra->id)->where('vivo', 1)->inRandomOrder()->limit(2)->get();
+
+        if ($jugadores->count() < 2) {
+            return $this->generarResurreccion($guerra);
+        }
+
+        $j1 = $jugadores[0];
+        $j2 = $jugadores[1];
+
+        $oldEq1 = $j1->equipo_id;
+        $j1->update(['equipo_id' => $j2->equipo_id]);
+        $j2->update(['equipo_id' => $oldEq1]);
+
+        Actividad::create([
+            'guerra_id' => $guerra->id,
+            'asesino' => $j1->nombre,
+            'muerto' => $j2->nombre,
+            'tipo' => 'cambio'
+        ]);
+        return redirect()->back()->with('success', "Evento aleatorio generado");
+    }
+
+    private function generarResurreccion($guerra)
+    {
+        $muerto = Jugador::where('guerra_id', $guerra->id)->where('vivo', 0)->inRandomOrder()->first();
+
+        if (!$muerto) {
+            return $this->generarCambioEquipo($guerra);
+        }
+
+        $muerto->update(['vivo' => true, 'asesinadopor' => null]);
+
+        Actividad::create([
+            'guerra_id' => $guerra->id,
+            'asesino' => null,
+            'muerto' => $muerto->nombre,
+            'tipo' => 'resucitar'
+        ]);
+
+        return redirect()->back()->with('success', "Evento aleatorio generado");
+    }
     /**
      * Store a newly created resource in storage.
      */

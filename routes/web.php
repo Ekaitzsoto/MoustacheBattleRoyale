@@ -35,6 +35,7 @@ Route::post('/jugador/nuevo', [JugadorController::class, 'store']);
 Route::delete('/jugador/{id}/delete', [JugadorController::class, 'destroy']);
 
 Route::post('/actividad/nueva/{id}', [ActividadController::class, 'create']);
+Route::post('/actividad/evento-aleatorio/{id}', [ActividadController::class, 'eventoAleatorio']);
 
 Route::get('/historial',  [GuerraController::class, 'show']);
 Route::get('/estadisticas',  [IndexController::class, 'show']);

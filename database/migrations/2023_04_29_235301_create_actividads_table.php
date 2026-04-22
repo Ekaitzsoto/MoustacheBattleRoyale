@@ -11,21 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('asesinatos', function (Blueprint $table) {
+        Schema::create('actividads', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger("guerra_id");
             $table->foreign("guerra_id")->references("id")->on("guerras");
-            $table->string("asesino");
+            $table->string("asesino")->nullable();
             $table->string("muerto");
+            $table->string("tipo")->default("asesinato");
             $table->timestamps();
         });
     }
-
+    
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('asesinatos');
+        Schema::dropIfExists('actividads');
     }
 };

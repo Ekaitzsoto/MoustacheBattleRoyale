@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nombre');
             $table->integer('jugadores_equipo');
+            $table->integer('max_eventos');
             $table->string('ganador')->nullable();
             $table->string('estado');
             $table->timestamps();

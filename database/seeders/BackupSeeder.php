@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use App\Models\Guerra;
 use App\Models\Equipo;
 use App\Models\Jugador;
-use App\Models\Asesinato;
+use App\Models\Actividad;
 use Illuminate\Support\Facades\DB;
 
 class BackupSeeder extends Seeder
@@ -19,12 +19,12 @@ class BackupSeeder extends Seeder
             DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         }
 
-        Asesinato::truncate();
+        Actividad::truncate();
         Jugador::truncate();
         Equipo::truncate();
         Guerra::truncate();
 
-        Guerra::create(['id' => 1, 'nombre' => 'WAR 7 septimus mortis', 'estado' => 'Creado', 'jugadores_equipo' => 10]);
+        Guerra::create(['id' => 1, 'nombre' => 'WAR 7 septimus mortis', 'estado' => 'Creado', 'jugadores_equipo' => 10, 'max_eventos' => 5]);
         Equipo::create(['id' => 1, 'nombre' => 'Ibarrako Piparrak', 'presidente' => 'Guindi', 'guerra_id' => 1]);
         Equipo::create(['id' => 2, 'nombre' => 'Maduritos, limpios y discretos', 'presidente' => 'ALVARE', 'guerra_id' => 1]);
         Equipo::create(['id' => 3, 'nombre' => 'Todo tiene una explicación', 'presidente' => 'Don Mikel Malagón Azpeitia', 'guerra_id' => 1]);

@@ -12,6 +12,7 @@ class Guerra extends Model
     protected $fillable = [
         'nombre',
         'jugadores_equipo',
+        'max_eventos',
         'ganador',
         'estado'
     ];

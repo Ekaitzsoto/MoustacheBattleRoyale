@@ -29,6 +29,13 @@
             </div>
         </div>
 
+        <div class="row justify-content-center text-start">
+            <div class="col-12 mb-3">
+                <label for="max_eventos" class="form-label">Máximo de eventos aleatorios</label>
+                <input type="number" class="form-control bg-transparent text-light @error('max_eventos') is-invalid @enderror" min="1" id="max_eventos" name="max_eventos" value="{{ old('max_eventos') }}">
+            </div>
+        </div>
+
         <div class="row justify-content-center">
             <div class="col-12 mb-3 text-end">
                 <button type="submit" class="btn btn-outline-info">Crear</button>
